@@ -1,0 +1,96 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function donate_call_to_action_menu() {
+
+
+	$items['admin/config/equalitywi'] = array(
+		'title' => 'Equality Wisconsin Module Settings',
+		'position' => 'left',
+		'weight' => -100,
+		'page callback' => 'system_admin_menu_block_page',
+		'access arguments' => array('administer site configuration'),
+		'file' => 'system.admin.inc',
+		'file path' => drupal_get_path('module', 'system'),
+	);
+
+	$items['admin/config/equalitywi/donate_call_to_action'] = array(
+		'title' => 'Donate Call To Action Settings',
+		'description' => 'Manage settings for the donation call-to-action.',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('donate_call_to_action_admin'),
+		'access arguments' => array('administer donate_call_to_action settings'),
+		'type' => MENU_NORMAL_ITEM,
+	);
+
+	return $items;
+
+}
+
+function donate_call_to_action_admin() {
+
+	$form = array();
+
+	$title = variable_get('donate_call_to_action_title', '');
+
+	$form['donate_call_to_action_title'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Call To Action Button Text'),
+		'#default_value' => $title,
+		'#description' => t("This text will appear on the donate button (or grabber)."),
+	);
+	
+	$body = variable_get('donate_call_to_action_body', '');
+
+	$form['donate_call_to_action_body'] = array(
+		'#type' => 'text_format',
+		'#title' => t('Call To Action Body'),
+		'#default_value' => empty($body['value']) ? '' : $body['value'],
+		'#description' => t("This text will appear when the donate button is clicked (or pulled down)."),
+	);
+
+	return system_settings_form($form);
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function donate_call_to_action_block_info() {
+	$blocks = array();
+
+	$blocks['donate_call_to_action_block'] = array(
+		'info' => t('Donate Call To Action'), 
+	);
+	
+	return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function donate_call_to_action_block_view($arg = null) {
+
+	$block = array(
+		'subject' => t('Donate Call To Action'),
+		'content' => donate_call_to_action_block_html(),
+	);
+	
+	return $block;
+
+}
+
+function donate_call_to_action_block_html() {
+	
+	$title = variable_get('donate_call_to_action_title', '');
+	$body = variable_get('donate_call_to_action_body', '');
+	
+	$html = '<input type="checkbox" name="donate_call_to_action_input" id="donate_call_to_action_input" />';
+	$html .= '<div class="donate_call_to_action_content">';
+	$html .= '<div class="donate_call_to_action_body"><div>' . $body['value'] . '</div></div>';
+	$html .= '<div class="donate_call_to_action_button"><label for="donate_call_to_action_input"><span>' . $title . '</span></label></div></div>';
+
+	return $html;
+
+}

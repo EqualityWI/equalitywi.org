@@ -1,0 +1,184 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+html {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+q, blockquote {
+  quotes: none; }
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+a img {
+  border: none; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block; }
+
+/* ==========================================================================
+   Definitions
+   ========================================================================== */
+/* ==========================================================================
+   Document Styles
+   ========================================================================== */
+body {
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  body:not(.front) > header {
+    padding-top: 25px; }
+    body:not(.front) > header #block-menu-menu-auxiliary-menu {
+      display: none; }
+  body > header {
+    height: auto;
+    border-bottom-width: 2px; }
+    body > header #header_region_wrap {
+      height: auto; }
+      body > header #header_region_wrap .region {
+        width: auto;
+        margin: 0;
+        height: auto;
+        overflow: hidden;
+        *zoom: 1; }
+        body > header #header_region_wrap .region #block-delta-blocks-logo {
+          margin-top: 20px; }
+        body > header #header_region_wrap .region .block-donate-call-to-action input + .donate_call_to_action_content .donate_call_to_action_body > div {
+          width: 310px;
+          font-size: .9em; }
+        body > header #header_region_wrap .region .block-donate-call-to-action input + .donate_call_to_action_content .donate_call_to_action_button {
+          width: 310px;
+          font-size: .8em; }
+        body > header #header_region_wrap .region .block-donate-call-to-action input:checked + .donate_call_to_action_content .donate_call_to_action_body {
+          max-height: 470px; }
+        body > header #header_region_wrap .region #block-menu-menu-auxiliary-menu {
+          position: static;
+          margin: 0 25%;
+          padding: .5em 1.2em .3em; }
+          body > header #header_region_wrap .region #block-menu-menu-auxiliary-menu .menu {
+            text-align: center; }
+            body > header #header_region_wrap .region #block-menu-menu-auxiliary-menu .menu > li {
+              display: inline;
+              padding: 0 !important;
+              border: none !important;
+              margin: 0; }
+              body > header #header_region_wrap .region #block-menu-menu-auxiliary-menu .menu > li.first {
+                display: none; }
+        body > header #header_region_wrap .region #block-system-main-menu {
+          position: static;
+          float: right;
+          margin: 1em 0;
+          font-size: .9em; }
+          body > header #header_region_wrap .region #block-system-main-menu .menu > li {
+            display: block;
+            float: right;
+            clear: right;
+            padding-right: 0;
+            margin: .2em 0;
+            text-align: center; }
+            body > header #header_region_wrap .region #block-system-main-menu .menu > li a {
+              padding-left: .5em;
+              padding-right: .5em; }
+  body > #main {
+    width: auto;
+    margin: 0 10px; }
+    body > #main form input[type="text"], body > #main form input[type="password"], body > #main form input[type="tel"], body > #main form input[type="number"], body > #main form input[type="email"], body > #main form select {
+      width: auto;
+      max-width: 90%; }
+    body > #main > #before_content .block {
+      width: auto; }
+      body > #main > #before_content .block > div > h2 {
+        background: #273b8f url(../images/headline-bg.png) no-repeat -20px center;
+        color: white;
+        height: 40px;
+        padding-left: 30px;
+        line-height: 40px;
+        border-bottom: 4px solid #21a7df;
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+        margin: -15px -15px 15px -15px;
+        font-size: 18px;
+        overflow: hidden; }
+      body > #main > #before_content .block#block-views-latest-articles-block {
+        width: auto; }
+        body > #main > #before_content .block#block-views-latest-articles-block > div > .content .view-header {
+          display: none; }
+        body > #main > #before_content .block#block-views-latest-articles-block > div > .content .item-list > ul > li {
+          width: auto; }
+          body > #main > #before_content .block#block-views-latest-articles-block > div > .content .item-list > ul > li .node > h2:after {
+            display: none; }
+          body > #main > #before_content .block#block-views-latest-articles-block > div > .content .item-list > ul > li .node > h2 > a {
+            width: auto; }
+      body > #main > #before_content .block.block-webform > div .content form #webform-component-first-name, body > #main > #before_content .block.block-webform > div .content form #webform-component-last-name, body > #main > #before_content .block.block-webform > div .content form #webform-component-email-address {
+        float: none;
+        width: auto; }
+        body > #main > #before_content .block.block-webform > div .content form #webform-component-first-name input, body > #main > #before_content .block.block-webform > div .content form #webform-component-last-name input, body > #main > #before_content .block.block-webform > div .content form #webform-component-email-address input {
+          width: auto;
+          max-width: 220px; }
+      body > #main > #before_content .block#block-views-social-media-posts-block > div .content .view-header {
+        display: none; }
+      body > #main > #before_content .block#block-views-social-media-posts-block > div .content .item-list > ul {
+        max-height: intrinsic; }
+      body > #main > #before_content .block#block-block-4 {
+        display: none; }
+      body > #main > #before_content .block#block-block-2 > div .content a {
+        font-size: 1.2em; }
+    body > #main > #page_content {
+      font-size: .85em; }
+      body > #main > #page_content #page-title {
+        font-size: 18px;
+        overflow: hidden; }
+      body > #main > #page_content .node-article > .content .field-name-field-image img, body > #main > #page_content .node-article > .content .field-name-field-headshot img, body > #main > #page_content .node-page > .content .field-name-field-image img, body > #main > #page_content .node-page > .content .field-name-field-headshot img, body > #main > #page_content .node-staff-member > .content .field-name-field-image img, body > #main > #page_content .node-staff-member > .content .field-name-field-headshot img {
+        max-width: 170px;
+        height: auto; }
+      body > #main > #page_content .view-staff-listing .view-content .views-field-body {
+        clear: both; }
+      body > #main > #page_content .view-latest-articles .item-list > ul .links.inline {
+        display: none; }
+      body > #main > #page_content .view-events-calendar .date-heading {
+        text-align: left; }
+  body > footer #footer_region_wrap .region {
+    width: auto;
+    margin: 0;
+    overflow: hidden;
+    *zoom: 1; }
+    body > footer #footer_region_wrap .region .block {
+      display: none; }
+    body > footer #footer_region_wrap .region #block-block-3 {
+      display: block;
+      margin-top: 2em;
+      text-align: center; }
+      body > footer #footer_region_wrap .region #block-block-3 p {
+        line-height: 1.4; }
+    body > footer #footer_region_wrap .region .block-menu-block {
+      display: block;
+      padding-right: 20px; }
+    body > footer #footer_region_wrap .region .menu-name-main-menu {
+      display: block;
+      width: auto; }

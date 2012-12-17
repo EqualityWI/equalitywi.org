@@ -1,0 +1,355 @@
+
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/utilities/general/clearfix";
+
+/* ==========================================================================
+   Definitions
+   ========================================================================== */
+   
+$darkblue: rgb(39, 59, 143);
+$brightblue: rgb(33, 167, 223);
+$lightblue: rgb(206, 226, 233);
+$darkgray: rgb(76, 80, 81);
+$lightgray: #e1e6e7;
+$shadowcolor: rgba(0, 0, 0, 0.5);
+$shortduration: .3s;
+
+@mixin serif {
+	font-family: 'Arvo', Rockwell, Georgia, Times, "Times New Roman", serif;
+	font-style: normal;
+}
+
+@mixin headline-sans {
+	font-family: 'Montserrat', "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+}
+
+@mixin normal-sans {
+	font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* ==========================================================================
+   Document Styles
+   ========================================================================== */
+
+body {
+	@include normal-sans;
+
+	&:not(.front) {
+		
+		> header {
+			padding-top: 25px;
+			
+			#block-menu-menu-auxiliary-menu {
+				display: none;
+			}
+		}
+	}
+	
+	> header {
+		height: auto;
+		border-bottom-width: 2px;
+		
+		#header_region_wrap {
+			height: auto;
+			
+			.region {
+				width: auto;
+				margin: 0;
+				height: auto;
+				@include clearfix;
+				
+				#block-delta-blocks-logo {
+					margin-top: 20px;
+				}
+				
+				.block-donate-call-to-action {
+				
+					input {
+						
+						+ .donate_call_to_action_content {
+						
+							.donate_call_to_action_body {
+								
+								> div {
+									width: 310px;
+									font-size: .9em;
+								}
+							}
+							
+							.donate_call_to_action_button {
+								width: 310px;
+								font-size: .8em;
+							}
+						}
+						
+						&:checked + .donate_call_to_action_content {
+						
+							.donate_call_to_action_body {
+								max-height: 470px;
+							}
+						}
+					}
+				}
+				
+				#block-menu-menu-auxiliary-menu {
+					position: static;
+					margin: 0 25%;
+					padding: .5em 1.2em .3em;
+					
+					.menu {
+						text-align: center;
+						
+						> li {
+							display: inline;
+							padding: 0 !important;
+							border: none !important;
+							margin: 0;
+							
+							&.first {
+								display: none;
+							}
+						}
+					}
+				}
+				
+				#block-system-main-menu {
+					position: static;
+					float: right;
+					margin: 1em 0;
+					font-size: .9em;
+					
+					.menu {
+						
+						> li {
+							display: block;
+							float: right;
+							clear: right;
+							padding-right: 0;
+							margin: .2em 0;
+							text-align: center;
+							
+							a {
+								padding-left: .5em;
+								padding-right: .5em;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	> #main {
+		width: auto;
+		margin: 0 10px;
+		
+		form {
+			
+			input[type="text"], input[type="password"], input[type="tel"], input[type="number"], input[type="email"], select {
+				width: auto;
+				max-width: 90%;
+			}
+		}
+		
+		> #before_content {
+			
+			.block {
+				width: auto;
+					
+				> div {
+					
+					> h2 {
+						background: $darkblue url(../images/headline-bg.png) no-repeat -20px center;
+						color: white;
+						height: 40px;
+						padding-left: 30px;
+						line-height: 40px;
+						border-bottom: 4px solid $brightblue;
+						@include text-shadow(2px 2px 0 $shadowcolor);
+						margin: -15px -15px 15px -15px;
+						font-size: 18px;
+						overflow: hidden;
+					}
+				}
+			
+				&#block-views-latest-articles-block {
+					width: auto;
+					
+					> div {
+						
+						> .content {
+							
+							.view-header {
+								display: none;
+							}
+							
+							.item-list > ul {
+								
+								> li {
+									width: auto;
+									
+									.node {
+										
+										> h2 {
+										
+											&:after {
+												display: none;
+											}
+											
+											> a {
+												width: auto;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				&.block-webform {
+					
+					> div {
+						
+						.content {
+							
+							form {
+							
+								#webform-component-first-name, #webform-component-last-name, #webform-component-email-address {
+									float: none;
+									width: auto;
+									
+									input {
+										width: auto;
+										max-width: 220px;
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				&#block-views-social-media-posts-block {
+					
+					> div {
+						
+						.content {
+							
+							.view-header {
+								display: none;
+							}
+							
+							.item-list > ul {
+								max-height: intrinsic;
+							}
+						}
+					}
+				}
+				
+				&#block-block-4 { //Facebook like box block
+					display: none;
+				}
+				
+				&#block-block-2 { //Donate now block
+					
+					> div {
+						
+						.content {
+							
+							a {
+								font-size: 1.2em;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		> #page_content {
+			font-size: .85em;
+			
+			#page-title {
+				font-size: 18px;
+				overflow: hidden;
+			}
+			
+			.node-article, .node-page, .node-staff-member {
+				
+				> .content {
+					
+					.field-name-field-image, .field-name-field-headshot {
+						
+						img {
+							max-width: 170px;
+							height: auto;
+						}
+					}
+				}
+			}
+			
+			.view-staff-listing {
+				
+				.view-content {
+				
+					.views-field-body {
+						clear: both;
+					}
+				}
+			}
+			
+			.view-latest-articles {
+									
+				.item-list > ul {
+				
+					.links.inline {
+						display: none;
+					}
+				}
+			}
+			
+			.view-events-calendar {
+				
+				.date-heading {
+					text-align: left;
+				}
+			}
+		}
+	}
+	
+	> footer {
+		
+		#footer_region_wrap {
+			
+			.region {
+				width: auto;
+				margin: 0;
+				@include clearfix;
+				
+				.block {
+					display: none;
+				}
+				
+				#block-block-3 {
+					display: block;
+					margin-top: 2em;
+					text-align: center;
+					
+					p {
+						line-height: 1.4;
+					}
+				}
+				
+				.block-menu-block {
+					display: block;
+					padding-right: 20px;
+				}
+				
+				.menu-name-main-menu {
+					display: block;
+					width: auto;
+				}
+			}
+		}
+	}
+}

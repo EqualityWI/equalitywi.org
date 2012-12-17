@@ -1,0 +1,22 @@
+name = Equality WI
+core = 7.x
+engine = phptemplate
+
+stylesheets[all][] = css/screen.css
+stylesheets[only screen and (min-device-width: 320px) and (max-device-width: 480px),
+			only screen and (-webkit-min-device-pixel-ratio: 1.5),
+			only screen and (min--moz-device-pixel-ratio: 1.5),
+			only screen and (-o-min-device-pixel-ratio: 3/2),
+			only screen and (min-device-pixel-ratio: 1.5)
+			][] = css/mobile.css
+stylesheets[print][] = css/print.css
+
+scripts[] = js/modernizr.min.js
+scripts[] = js/site-ck.js
+
+regions[header] = Header
+regions[before-content] = Before Content
+regions[content] = Content
+regions[after-content] = After Content
+regions[footer] = Footer
+regions[help] = Help

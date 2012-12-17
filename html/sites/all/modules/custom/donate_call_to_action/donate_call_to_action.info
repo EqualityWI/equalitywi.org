@@ -1,0 +1,6 @@
+name = Donate Call To Action
+description = Adds the donate call to action grabber to the page.
+package = Added Functionality
+core = 7.x
+configure = admin/config/equalitywi/donate_call_to_action
+files[] = donate_call_to_action.module
