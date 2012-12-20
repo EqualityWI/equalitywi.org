@@ -108,17 +108,6 @@
       "outputAbbreviatedPath" : "\/js\/site-ck.js",
       "fileType" : 64
     },
-    "\/images\/apple-touch-icon-iphone4.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/images\/apple-touch-icon-iphone4.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/images\/apple-touch-icon-iphone4.png",
-      "initialSize" : 1675,
-      "fileType" : 8192
-    },
     "\/images\/header-bg.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -128,6 +117,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/images\/header-bg.png",
       "initialSize" : 2305,
+      "fileType" : 8192
+    },
+    "\/images\/apple-touch-icon-iphone4.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/images\/apple-touch-icon-iphone4.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/images\/apple-touch-icon-iphone4.png",
+      "initialSize" : 1675,
       "fileType" : 8192
     },
     "\/images\/apple-touch-icon.png" : {
