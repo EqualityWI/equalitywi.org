@@ -7,11 +7,11 @@ function donate_call_to_action_menu() {
 
 
 	$items['admin/config/equalitywi'] = array(
-		'title' => 'Equality Wisconsin Module Settings',
+		'title' => 'Equality WI Modules',
 		'position' => 'left',
 		'weight' => -100,
 		'page callback' => 'system_admin_menu_block_page',
-		'access arguments' => array('administer site configuration'),
+		'access arguments' => array('administer donate_call_to_action settings'),
 		'file' => 'system.admin.inc',
 		'file path' => drupal_get_path('module', 'system'),
 	);
@@ -52,6 +52,21 @@ function donate_call_to_action_admin() {
 	);
 
 	return system_settings_form($form);
+}
+
+/**
+ * Implements hook_permission().
+ */
+function donate_call_to_action_permission() {
+
+	$permissions = array(
+		'administer donate_call_to_action settings' => array(
+			'title' => t('Administer Donate Call To Action Module'),
+			'description' => 'Allows users to update the callout in the Donate Call To Action module block.',
+		),
+	);
+	
+	return $permissions;
 }
 
 /**
