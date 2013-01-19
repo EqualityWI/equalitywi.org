@@ -1,0 +1,5 @@
+name = Salsa Supporter Signup
+description = Adds the mailing list signup block and page.
+package = Added Functionality
+core = 7.x
+files[] = donate_call_to_action.module

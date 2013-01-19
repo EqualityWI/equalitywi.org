@@ -73,6 +73,7 @@ body {
 					
 					> li {
 						display: table-cell;
+						padding-left: .5em;
 						
 						a {
 							display: block;
@@ -270,7 +271,7 @@ body {
 				}
 			}
 			
-			input[type="text"], input[type="password"], input[type="tel"], input[type="number"], input[type="email"], textarea, select {
+			input[type="text"], input[type="password"], input[type="tel"], input[type="number"], input[type="email"], textarea, select, input:not([type]) {
 				border: 3px solid $darkblue;
 				@include box-shadow(3px 3px 6px $shadowcolor);
 				@include headline-sans;
@@ -373,12 +374,17 @@ body {
 					}
 				}
 				
+				&:nth-of-type(even) {
+					clear: left;
+				}
+				
 				&#block-views-latest-articles-block {
 					width: 1103px;
 					
 					> div {
 						padding: 0;
 						height: 344px;
+						min-height: intrinsic !important;
 						
 						> h2 {
 							margin: 0;
@@ -538,6 +544,60 @@ body {
 												border-bottom: none;
 												height: 60px;
 											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				&.block-salsa-supporter-signup {
+					
+					> div {
+						
+						.content {
+							
+							form {
+								
+								.form-item-First-Name, .form-item-Last-Name {
+									float: left;
+									width: 240px;
+									
+									input {
+										width: 200px;
+									}
+								}
+								
+								.form-item-Last-Name {
+									
+									input {
+										width: 230px;
+									}
+								}
+								
+								.form-item-Email {
+									clear: left;
+									
+									input {
+										max-width: 470px;
+									}
+								}
+								
+								.form-submit {
+									margin-top: 5px;
+								}
+								
+								> div { //When messesages...
+									
+									.messages {
+										margin: 0;
+									}
+									
+									+ div {
+										
+										> p:first-of-type {
+											display: none;
 										}
 									}
 								}
@@ -1004,6 +1064,11 @@ body {
 								
 								.monthview {
 									background: $lightblue;
+									
+									.views-field-title {
+										color: $darkblue;
+										font-weight: bold;
+									}
 								}
 							}
 						}
@@ -1112,6 +1177,123 @@ body {
 									}
 								}
 							}
+						}
+					}
+				}
+			}
+			
+			.salsa {
+			
+				p {
+					margin: 0 0 .8em;
+				}
+			
+				strong, em {
+					display: block;
+					margin-bottom: .3em;
+				}
+			
+				strong {
+					font-weight: bold;
+				}
+				
+				em {
+					font-style: italic;
+					font-size: .9em;
+				}
+				
+				.error {
+					width: auto;
+					font-size: .9em;
+					margin: .5em 0;
+				}
+			
+				#salsaDonationHeader {
+					border-bottom: 1px solid $darkblue;
+					padding: 1em 0;
+					margin-bottom: 1em;
+					
+					p {
+					
+						&, & * {
+							font-size: 100% !important;
+							font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+						}
+					}
+				}
+				
+				form {
+				
+					* {
+						font-size: 100% !important;
+						font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+					}
+				
+					fieldset {
+						border: 1px solid $darkblue;
+						padding: 10px;
+						@include border-radius(10px);
+						margin: 15px;
+						
+						legend {
+							font-weight: bold;
+							padding: 0 1em;
+						}
+						
+						p {
+							margin-left: 30%;
+							padding-left: 1em;
+						}
+						
+						> div {
+							margin: 0;
+							padding: 0;
+							
+							> br {
+								display: none;
+							}
+						}
+					}
+					
+					.formRow {
+						display: block;
+						
+						label {
+							@include inline-block;
+							width: 30%;
+							text-align: right;
+							
+							&.selectLabel {
+								width: auto;
+								text-align: left;
+							}
+						}
+						
+						input, textarea {
+							max-width: 50%;
+							
+							&[type="checkbox"], &[type="radio"], select {
+								
+								+ label {
+									width: auto;
+									text-align: left;
+								}
+							}
+						}
+						
+						.blockInput {
+							@include inline-block;
+						}
+						
+						+ p {
+							margin-top: .5em;
+						}
+					}
+					
+					#recurring_options {
+						
+						.formRow {
+							@include inline-block;
 						}
 					}
 				}

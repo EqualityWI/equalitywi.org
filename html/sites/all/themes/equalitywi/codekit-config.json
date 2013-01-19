@@ -1,6 +1,6 @@
 {
   "CodeKitInfo" : "This is a CodeKit project configuration file. It is designed to sync project settings across multiple machines. Modifying the contents of this file can be a poor life decision if you don't know what you're doing. This file is not useful unless accompanied by the project that created it in CodeKit. For more information, see: http:\/\/incident57.com\/codekit",
-  "creatorBuild" : "8241",
+  "creatorBuild" : "8248",
   "files" : {
     "\/images\/diagonal-stripe-repeatable.png" : {
       "ignoreWasSetByUser" : 0,
@@ -97,16 +97,16 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/images\/apple-touch-icon-iphone4.png" : {
+    "\/js\/site.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/images\/apple-touch-icon-iphone4.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/images\/apple-touch-icon-iphone4.png",
-      "initialSize" : 1675,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/js\/site.js",
+      "outputStyle" : 0,
+      "syntaxCheckerStyle" : 2,
+      "outputAbbreviatedPath" : "\/js\/site-ck.js",
+      "fileType" : 64
     },
     "\/images\/header-bg.png" : {
       "ignoreWasSetByUser" : 0,
@@ -119,16 +119,16 @@
       "initialSize" : 2305,
       "fileType" : 8192
     },
-    "\/js\/site.js" : {
+    "\/images\/apple-touch-icon-iphone4.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/js\/site.js",
-      "outputStyle" : 0,
-      "syntaxCheckerStyle" : 2,
-      "outputAbbreviatedPath" : "\/js\/site-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/images\/apple-touch-icon-iphone4.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/images\/apple-touch-icon-iphone4.png",
+      "initialSize" : 1675,
+      "fileType" : 8192
     },
     "\/images\/apple-touch-icon.png" : {
       "ignoreWasSetByUser" : 0,
@@ -170,17 +170,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/images\/logo-main.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/images\/logo-main.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/images\/logo-main.png",
-      "initialSize" : 5467,
-      "fileType" : 8192
-    },
     "\/images\/headline-bg.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -190,6 +179,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/images\/headline-bg.png",
       "initialSize" : 941,
+      "fileType" : 8192
+    },
+    "\/images\/logo-main.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/images\/logo-main.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/images\/logo-main.png",
+      "initialSize" : 5467,
       "fileType" : 8192
     },
     "\/config.rb" : {

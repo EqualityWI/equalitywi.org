@@ -48,7 +48,7 @@ function resize_blocks_vertically() {
 				var headline = jQuery(f).find('h2');
 				if (headline.length) jQuery(f).parent().addClass('block-' + slugify(headline.html()));
 				jQuery(f).css({
-					'height': current_max_h + 'px'
+					'min-height': current_max_h + 'px'
 				}).parent().addClass('row-' + current_row_i);
 			});
 			current_row_i++;
@@ -56,7 +56,7 @@ function resize_blocks_vertically() {
 			current_max_h = 0;
 			current_offset = 0;
 		}
-		if (jQuery(e).height() > current_max_h) current_max_h = jQuery(e).height();
+		if (jQuery(e).height()+15 > current_max_h) current_max_h = jQuery(e).height()+15;
 		current_row.push(jQuery(e));
 		current_offset = jQuery(e).offset().left;
 		if (i == blocks.length - 1) {
@@ -64,7 +64,7 @@ function resize_blocks_vertically() {
 				var headline = jQuery(f).find('h2');
 				if (headline.length) jQuery(f).parent().addClass('block-' + slugify(headline.html()));
 				jQuery(f).css({
-					'height': current_max_h + 'px'
+					'min-height': current_max_h + 'px'
 				}).parent().addClass('row-' + current_row_i);
 			});
 		}

@@ -1,0 +1,419 @@
+<?php
+/**
+ * Implementation of hook_menu().
+ */
+function salsa_supporter_signup_menu() {
+  $items['email-signup'] = array(
+    'title' => 'Stay in touch with Equality Wisconsin',
+    'page callback' => 'salsa_supporter_signup_view',
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+	);
+  return $items;
+}
+
+/**
+* Implements hook_block_info().
+*/
+function salsa_supporter_signup_block_info() {
+ $blocks = array();
+ $blocks['salsa_supporter_signup'] = array(
+   'info' => t('Mini Email Signup for Salsa'),
+   'cache' => DRUPAL_CACHE_GLOBAL,
+ );
+ return $blocks;
+}
+
+/**
+* Implements hook_block_view().
+*/
+function salsa_supporter_signup_block_view($block_name = '') {
+
+	if ($block_name == 'salsa_supporter_signup') {
+       $content = drupal_get_form('salsa_supporter_signup_mini_form');
+       $block = array(
+         'content' => $content,
+       );
+       return $block;
+	}
+
+}
+
+/**
+* Implements hook_view().
+*/
+function salsa_supporter_signup_view($arg = null) {
+  
+  return drupal_get_form('salsa_supporter_signup_full_form');
+
+}
+
+/**
+* Implements hook_forms().
+*/
+function salsa_supporter_signup_forms($form_id, $args) {
+  // Simply reroute the (non-existing) $form_id 'mymodule_first_form' to
+  // 'mymodule_main_form'.
+  $forms['salsa_supporter_signup_mini_form'] = array(
+    'callback' => 'salsa_supporter_signup_form_builder',
+    'callback arguments' => array(TRUE),
+  );
+
+  // Reroute the $form_id and prepend an additional argument that gets passed to
+  // the 'mymodule_main_form' form builder function.
+  $forms['salsa_supporter_signup_full_form'] = array(
+    'callback' => 'salsa_supporter_signup_form_builder',
+    'callback arguments' => array(FALSE),
+  );
+
+  return $forms;
+}
+
+/**
+* Returns the signup mini block forms
+*/
+function salsa_supporter_signup_form_builder($node, $form_state, $mini) {
+	
+	//adds invisible field ('honeypot') for spam protection
+	//also times how long the form takes to be submitted
+	//honeypot_add_form_protection($form, $form_state, array('honeypot', 'time_restriction'));
+	
+	$prefilled = isset($_GET['key']) && !empty($_GET['key']) && $_GET['key'] != 0;
+	
+	if($mini) {
+		$form['intro'] = array(
+		  '#markup' => t('<p>Sign up to receive Equality Wisconsin\'s emails.'),
+		);
+	} elseif($prefilled) {
+		$form['intro'] = array(
+		  '#markup' => t('<p>To complete your profile, please fill out the information below.'),
+		);
+		
+		$form['key'] = array(
+		  '#type' => 'hidden',
+		  '#value' => $_GET['key'],
+		);
+		
+	} else {
+		$form['intro'] = array(
+		  '#markup' => t('<p>Sign up for Equality Wisconsin\'s emails using the form below. We\'ll keep you up-to-date on how on events throughout the state, and how you can stay involved.'),
+		);
+	}
+	
+	$form['First_Name'] = array(
+	 '#title' => t('First Name:'),
+	 '#type' => 'textfield',
+	 '#required' => TRUE,
+	);
+	
+	$form['Last_Name'] = array(
+	 '#title' => t('Last Name:'),
+	 '#type' => 'textfield',
+	 '#required' => TRUE,
+	);
+	
+	$form['Email'] = array(
+	 '#title' => t('Email:'),
+	 '#type' => 'textfield',
+	 '#required' => TRUE,
+	);
+	
+	if($mini) {
+		$form['submit'] = array(
+		 '#type' => 'submit',
+		 '#value' => t('Submit'),
+		 '#ajax' => array(
+	        'callback' => 'salsa_supporter_signup_form_mini_submit',
+	        'wrapper' => 'salsa-supporter-signup-mini-form',
+	        'method' => 'replace',
+	        'effect' => 'fade',
+	     ),
+		);
+	} else {
+	
+	$form['Phone'] = array(
+	 '#title' => t('Home Phone:'),
+	 '#type' => 'textfield',
+	);
+	
+	$form['Cell_Phone'] = array(
+	 '#title' => t('Cell Phone:'),
+	 '#type' => 'textfield',
+	);
+	
+	$form['Street'] = array(
+	 '#title' => t('Address:'),
+	 '#type' => 'textfield',
+	 '#required' => TRUE,
+	);
+	
+	$form['Street2'] = array(
+	 '#title' => t('Address 2:'),
+	 '#type' => 'textfield',
+	);
+	
+	$form['City'] = array(
+	 '#title' => t('City:'),
+	 '#type' => 'textfield',
+	 '#required' => TRUE,
+	);
+	
+	$form['State'] = array(
+	 '#title' => t('State:'),
+	 '#type' => 'textfield',
+	 '#required' => TRUE,
+	 '#maxlength' => 2,
+	);
+	
+	$form['Zip'] = array(
+	 '#title' => t('Zip Code:'),
+	 '#type' => 'textfield',
+	 '#required' => TRUE,
+	 '#maxlength' => 5,
+	);
+	
+	$form['Date_of_Birth'] = array(
+	 '#title' => t('Birth Date:'),
+	 '#type' => 'date_select',
+	 '#date_format' => 'm-d-Y',
+	 '#date_label_position' => 'within',
+	 '#date_year_range' => '-100:-13',
+	);
+		$form['submit'] = array(
+		 '#type' => 'submit',
+		 '#value' => t('Submit'),
+		 '#ajax' => array(
+	        'callback' => 'salsa_supporter_signup_form_full_submit',
+	        'wrapper' => 'salsa-supporter-signup-full-form',
+	        'method' => 'replace',
+	        'effect' => 'fade',
+	     ),
+		);
+	}
+	
+	if($prefilled) {
+		$prefillvals = salsa_supporter_signup_curl_get($_GET['key']);
+		foreach($form as $fkey => $fval) {
+			if(array_key_exists($fkey, $prefillvals)) {
+				if(strstr($form[$fkey]['#type'], 'date') === false) $form[$fkey]['#default_value'] = $prefillvals->{$fkey};
+				elseif(!empty($prefillvals->{$fkey})) $form[$fkey]['#default_value'] = date('Y-m-d h:i:s', strtotime(substr($prefillvals->{$fkey}, 0, -15)));
+			}
+		}
+	}
+	
+	$form['#validate'] = array('salsa_supporter_signup_form_validate');
+	
+	return $form;
+}
+
+/**
+* Validate the form.
+*/
+function salsa_supporter_signup_form_validate($form, &$form_state) {
+	if(!valid_email_address($form_state['values']['Email']))
+		form_set_error('Email', t('Email: Invalid email address.'));
+	if (strlen($form_state['values']['Phone']) > 0 && !preg_match('/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/', $form_state['values']['Phone']))
+		form_set_error('Phone', t('Home Phone: Invalid phone number.'));
+	if (strlen($form_state['values']['Cell_Phone']) > 0 && !preg_match('/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/', $form_state['values']['Cell_Phone']))
+		form_set_error('Cell_Phone', t('Cell Phone: Invalid phone number.'));
+	if (strlen($form_state['values']['State']) > 0 && !preg_match('/^[A-Za-z]{2}$/', $form_state['values']['State']))
+		form_set_error('State', t('State: Invalid state.'));
+	if (strlen($form_state['values']['Zip']) > 0 && !preg_match('/^[0-9]{5}$/', $form_state['values']['Zip']))
+		form_set_error('Zip', t('Zip Code: Invalid zip code.'));
+}
+
+/**
+* Submit the form.
+*/
+function salsa_supporter_signup_form_full_submit($form, &$form_state) {
+	
+	$errors = form_get_errors();
+	if($errors) {
+		return $form;
+	}
+	
+	$dob_vals = $form['Date_of_Birth']['#value'];
+	$dob_parsable = '';
+	foreach($dob_vals as $key => $val) {
+		$dob_parsable .= $form['Date_of_Birth'][$key]['#options'][$val] . ' ';
+	}
+	error_log($dob_parsable);
+	
+	$curl_vars = array(
+	  'First_Name' => $form['First_Name']['#value'],
+	  'Last_Name' => $form['Last_Name']['#value'],
+	  'Email' => $form['Email']['#value'],
+	  'Phone' => $form['Phone']['#value'],
+	  'Cell_Phone' => $form['Cell_Phone']['#value'],
+	  'Street' => $form['Street']['#value'],
+	  'Street2' => $form['Street2']['#value'],
+	  'City' => $form['City']['#value'],
+	  'State' => $form['State']['#value'],
+	  'Zip' => $form['Zip']['#value'],
+	  'Date_of_Birth' => date('Y-m-d', strtotime($dob_parsable)),
+	);
+	
+	$supporter_key = '';
+	
+	if(!salsa_supporter_signup_curl_submit($curl_vars, $supporter_key)) {
+		return array("#markup" => "<div class='messages error'><ul><li>Sorry an error occured during submission.<br />Please try again later.</ul></div>");
+	}
+	
+	return array("#markup" => "<div class='messages status'><ul><li>Your submission has been received.<br />Thank you for joining!</ul></div>");
+}
+
+function salsa_supporter_signup_form_mini_submit($form, &$form_state) {
+	
+	$errors = form_get_errors();
+	if($errors) {
+		return $form;
+	}
+		
+	$first_value = $form['First_Name']['#value'];
+	$last_value = $form['Last_Name']['#value'];
+	$email_value = $form['Email']['#value'];
+
+	$curl_vars = array(
+	  'First_Name' => $first_value,
+	  'Last_Name' => $last_value,
+	  'Email' => $email_value,
+	);
+	
+	$supporter_key = '';
+	
+	if(!salsa_supporter_signup_curl_submit($curl_vars, $supporter_key)) {
+		return array("#markup" => "<div class='messages error'><ul><li>Sorry an error occured during submission.<br />Please try again later.</ul></div>");
+	}
+	
+	global $base_url;
+	$completion_url = $base_url . '/email-signup';
+	if(!empty($supporter_key)) $completion_url .= '?key=' . $supporter_key;
+	
+	$body = '';
+	$body .= t('<p>Dear !first_name,</p>', array('!first_name' => $first_value));
+	$body .= t('<p><strong>Thank you for joining our fight!</strong></p>');
+	$body .= t('<p>To help us provide you with a better experience and to provide personalized info about action happening near you, please complete your profile by visiting <a href="!url">!url</a></p>', array('!url' => $completion_url));
+	$body .= t('<p>In Equality,<br />The Equality Wisconsin Staff</p>');
+
+	
+	$module = 'salsa_supporter_signup';
+	$mail_token = 'mini_form';
+	$from = variable_get('system_mail', 'info@equalitywi.org');
+	$message = array(
+	  'id' => $module . '_' . $mail_token,
+	  'to' => $email_value,
+	  'subject' => t('Thank you for joining Equality Wisconsin\'s mailing list'),
+	  'body' => $body,
+	  'headers' => array(
+	    'From' => $from, 
+	    'Sender' => $from, 
+	    'Return-Path' => $from,
+	    'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
+	  ),
+	);
+	$system = drupal_mail_system($my_module, $my_mail_token);
+	if ($system->mail($message)) {
+	  error_log($message['result']);
+	}
+	else {
+	  error_log($message['result']);
+	}
+		
+	drupal_mail($module, $key, $to, language_default(), array('body' => $body, 'subject' => $subject), $from, TRUE);
+
+	return array("#markup" => "<div class='messages status'><ul><li>Your submission has been received.<br />Thank you for joining!</ul></div>");
+}
+
+function salsa_supporter_signup_curl_auth() {
+	$url = "https://salsa3.salsalabs.com"; # URL to DIA API
+	$username = "astoffel@equalitywi.org"; # Campaign Manager username goes here
+	$password = "nnorgerl"; # Campaign Manager password goes here
+	$tmp_dir = file_directory_temp();
+	
+	//method #1 for building post objects to send to Salsa
+	$authfields["json"] = '1';
+	$authfields["email"] = $username;
+	$authfields["password"] = $password;
+	
+	//Initialize CURL connection
+	$ch = curl_init();
+	
+	//Set basic connection parameters:
+	//      See http://us.php.net/curl_setopt for more information on these settings
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 100);
+	
+	//Set Parameters to maintain cookies across sessions
+	curl_setopt($ch, CURLOPT_COOKIESESSION, TRUE);
+	curl_setopt($ch, CURLOPT_COOKIEFILE, $tmp_dir . '/cookies_file');
+	curl_setopt($ch, CURLOPT_COOKIEJAR, $tmp_dir . '/cookies_file');
+	
+	//Execute connection to authenticate to Salsa
+	//
+	//      https://sandbox.salsalabs.com/api/authenticate.sjs?email=1&password=1
+	//
+	curl_setopt($ch, CURLOPT_URL, "$url/api/authenticate.sjs");
+	curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($authfields));
+	$auth = json_decode(curl_exec($ch));
+	if($auth->status != 'success') {
+		curl_close($ch);
+		return false;
+	}
+	else return $ch;
+}
+
+function salsa_supporter_signup_curl_submit($fields, &$key) {
+	$url = "https://salsa3.salsalabs.com"; # URL to DIA API
+	
+	//method #2 for building post objects to send to Salsa
+	//  note:  unless you have a small number of supporters, this will fail.
+	//  try remving the 'groupBy' => 'Date_Created' statement.
+	$fields = array_merge(array('json'=>'1', 'object'=>'supporter'), $fields);
+	error_log(print_r($fields, TRUE));
+	$ch = salsa_supporter_signup_curl_auth();
+	if(!$ch) return false;
+	
+	//Execute query to return data back to the User/Application
+	//
+	//      https://sandbox.salsalabs.com/api/save?xml=1&object=supporter&...
+	//
+	curl_setopt($ch, CURLOPT_URL, "$url/save");
+	curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
+	$responses = json_decode(curl_exec($ch));
+	error_log($responses);
+	//Close the connection
+	curl_close($ch);
+
+	foreach($responses as $response) {
+		if($response->result != 'success') return false;
+		if(isset($response->key)) $key = $response->key;
+	}
+	
+	return true;
+}
+
+function salsa_supporter_signup_curl_get($key) {
+	$url = "https://salsa3.salsalabs.com"; # URL to DIA API
+	
+	//method #2 for building post objects to send to Salsa
+	//  note:  unless you have a small number of supporters, this will fail.
+	//  try remving the 'groupBy' => 'Date_Created' statement.
+	$fields = array('json'=>'1', 'object'=>'supporter', 'key' => $key);
+
+	$ch = salsa_supporter_signup_curl_auth();
+	if(!$ch) return false;
+	
+	//Execute query to return data back to the User/Application
+	//
+	//      https://sandbox.salsalabs.com/api/save?xml=1&object=supporter&...
+	//
+	curl_setopt($ch, CURLOPT_URL, "$url/api/getObject.sjs");
+	curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
+	$response = json_decode(curl_exec($ch));
+
+	//Close the connection
+	curl_close($ch);
+		
+	return $response;
+}
