@@ -117,11 +117,19 @@
 jQuery.noConflict();
 
 function is_mobile() {
-	var mobile_resolution = 'only screen and (-webkit-min-device-pixel-ratio: 1.5), '
-						  + 'only screen and (min--moz-device-pixel-ratio: 1.5), '
-						  + 'only screen and (-o-min-device-pixel-ratio: 3/2), '
-						  + 'only screen and (min-device-pixel-ratio: 1.5), '
-						  + 'only screen and (min-device-width: 320px) and (max-device-width: 480px)';
+	var mobile_resolution = 'only screen and (min-device-width : 320px) and (max-device-width : 599px), ' +
+							'only screen and (-webkit-min-device-pixel-ratio: 1) and (max-device-width : 801px), ' +
+							'only screen and (min--moz-device-pixel-ratio: 1) and (max-device-width : 801px), ' +
+							'only screen and (-o-min-device-pixel-ratio: 1) and (max-device-width : 801px), ' +
+							'only screen and (min-device-pixel-ratio: 1) and (max-device-width : 801px), ' +
+							'only screen and (-webkit-min-device-pixel-ratio: 1.5) and (max-device-width : 999px), ' +
+							'only screen and (min--moz-device-pixel-ratio: 1.5) and (max-device-width : 999px), ' +
+							'only screen and (-o-min-device-pixel-ratio: 3/2) and (max-device-width : 999px), ' +
+							'only screen and (min-device-pixel-ratio: 1.5) and (max-device-width : 999px), ' +
+							'only screen and (-webkit-min-device-pixel-ratio: 2) and (max-device-width : 1299px), ' +
+							'only screen and (min--moz-device-pixel-ratio: 2) and (max-device-width : 1299px), ' +
+							'only screen and (-o-min-device-pixel-ratio: 2) and (max-device-width : 1299px), ' +
+							'only screen and (min-device-pixel-ratio: 2) and (max-device-width : 1299px)';
 	//return true;
 	return Modernizr.mq(mobile_resolution);
 }
