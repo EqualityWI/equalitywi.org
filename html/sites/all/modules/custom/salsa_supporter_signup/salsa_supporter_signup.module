@@ -370,7 +370,7 @@ function salsa_supporter_signup_curl_submit($fields, &$key) {
 	//  note:  unless you have a small number of supporters, this will fail.
 	//  try remving the 'groupBy' => 'Date_Created' statement.
 	$fields = array_merge(array('json'=>'1', 'object'=>'supporter'), $fields);
-	error_log(print_r($fields, TRUE));
+
 	$ch = salsa_supporter_signup_curl_auth();
 	if(!$ch) return false;
 	
@@ -381,7 +381,7 @@ function salsa_supporter_signup_curl_submit($fields, &$key) {
 	curl_setopt($ch, CURLOPT_URL, "$url/save");
 	curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
 	$responses = json_decode(curl_exec($ch));
-	error_log($responses);
+
 	//Close the connection
 	curl_close($ch);
 
