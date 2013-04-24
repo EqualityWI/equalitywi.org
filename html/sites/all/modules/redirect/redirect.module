@@ -1361,8 +1361,6 @@ function redirect_parse_url($url) {
     }
   }
 
-  $url = trim($url, '/');
-
   // Convert to frontpage paths.
   if ($url == '<front>') {
     $url = '';
